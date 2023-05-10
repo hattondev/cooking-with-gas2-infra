@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cooking-with-gas2-vs
+  labels:
+    app: cooking-with-gas2
+    version: 0.0.1
+    backstage.io/kubernetes-id: cooking-with-gas2
+spec:
+  gateways:
+  - istio-gateway/apps-gateway
+  hosts:
+  - cooking-with-gas2.apps.wwtlab.net
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: cooking-with-gas2-svc
+        port:
+          number: 80
+      weight: 100
